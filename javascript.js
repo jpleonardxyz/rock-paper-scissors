@@ -15,4 +15,18 @@ function getComputerChoice(){
     }
 }
 
+function getHumanChoice(){
+    //ask the user to input their choice
+    let userChoice = prompt("Enter your choice of rock, paper or scissors");
+    
+    //check if the choice is valid, return a default choice if not
+    if (userChoice === null || (userChoice !== "rock" && userChoice !== "paper" && userChoice !== "scissors")){
+        return "rock";
+    }
+    //return the choice
+    return userChoice;
+}
+
+
+
 
