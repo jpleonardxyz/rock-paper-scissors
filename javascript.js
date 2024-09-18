@@ -27,32 +27,74 @@ function getHumanChoice(){
     return userChoice;
 }
 
-let humanScore;
-let computerScore;
 
-humanScore = computerScore = 0;
+function playGame(){
+    //declare variable to keep score
+    let humanScore;
+    let computerScore;
 
-function playRound(humanChoice, computerChoice){
-    //convert human choice into all caps to prevent case sensitivity
-    humanChoice = humanChoice.toUpperCase();
+    //set scores to zero
+    humanScore = 0;
+    computerScore = 0;
 
-    //if choices are the same return a draw
-    if (humanChoice === computerChoice.toUpperCase()){
-        console.log("This round is a draw - please play another round");
+    //create variable to track number of rounds
+    let roundNumber = 0;
+
+    //declare variables for human and computer choice
+    let humanSelection;
+    let computerSelection;
+
+    //play the game until 5 rounds are reached
+    while (roundNumber < 5) {
+        //get human and user selections
+        humanSelection = getHumanChoice();
+        computerSelection = getComputerChoice();
+
+        //play the round
+        playRound(humanSelection, computerSelection);
+    }
+
+    //determine and display the winner
+    if (humanScore > computerScore){
+        console.log("You beat the machine - final score was " + humanScore + " to " + computerScore);
+    }
+    else{
+        console.log("You lost to the machine - final score was " + humanScore + " to " + computerScore);
+    }
+    
+    
+    
+    
+    //declare the playRound function
+    function playRound(humanChoice, computerChoice){
+        //convert human choice into all caps to prevent case sensitivity
+        humanChoice = humanChoice.toUpperCase();
+
+        //if choices are the same return a draw
+        if (humanChoice === computerChoice.toUpperCase()){
+            console.log("This round is a draw");
+            return;
+        }
+
+        //determine outputs and update scores based on outcomes
+        if ((humanChoice === "ROCK" && computerChoice === "scissors") || 
+            (humanChoice === "SCISSORS" && computerChoice === "paper") ||
+            (humanChoice === "PAPER" && computerChoice === "rock")){
+                console.log(`You win - ${humanChoice} beats ${computerChoice.toUpperCase()}`);
+                humanScore++;
+            }
+        else{
+            console.log(`You lose - ${computerChoice.toUpperCase()} beats ${humanChoice}`);
+            computerScore++;
+        }
+
+        //increase the round counter to indicate a round was played
+        roundNumber++;
         return;
     }
 
-    //determine outputs and update scores based on outcomes
-    if ((humanChoice === "ROCK" && computerChoice === "scissors") || 
-        (humanChoice === "SCISSORS" && computerChoice === "paper") ||
-        (humanChoice === "PAPER" && computerChoice === "rock")){
-            console.log(`You win - ${humanChoice} beats ${computerChoice.toUpperCase()}`);
-            humanScore++;
-        }
-    else{
-        console.log(`You lose - ${computerChoice.toUpperCase()} beats ${humanChoice}`);
-            computerScore++;
-    }
-    
 }
+
+//play the game
+playGame();
 
