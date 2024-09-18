@@ -27,6 +27,32 @@ function getHumanChoice(){
     return userChoice;
 }
 
+let humanScore;
+let computerScore;
 
+humanScore = computerScore = 0;
 
+function playRound(humanChoice, computerChoice){
+    //convert human choice into all caps to prevent case sensitivity
+    humanChoice = humanChoice.toUpperCase();
+
+    //if choices are the same return a draw
+    if (humanChoice === computerChoice.toUpperCase()){
+        console.log("This round is a draw - please play another round");
+        return;
+    }
+
+    //determine outputs and update scores based on outcomes
+    if ((humanChoice === "ROCK" && computerChoice === "scissors") || 
+        (humanChoice === "SCISSORS" && computerChoice === "paper") ||
+        (humanChoice === "PAPER" && computerChoice === "rock")){
+            console.log(`You win - ${humanChoice} beats ${computerChoice.toUpperCase()}`);
+            humanScore++;
+        }
+    else{
+        console.log(`You lose - ${computerChoice.toUpperCase()} beats ${humanChoice}`);
+            computerScore++;
+    }
+    
+}
 
