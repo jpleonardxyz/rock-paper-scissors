@@ -45,6 +45,7 @@ function playGame(){
     let computerSelection;
 
     //play the game until 5 rounds are reached
+    /**
     while (roundNumber < 5) {
         //get human and user selections
         humanSelection = getHumanChoice();
@@ -53,6 +54,7 @@ function playGame(){
         //play the round
         playRound(humanSelection, computerSelection);
     }
+    **/
 
     //determine and display the winner
     if (humanScore > computerScore){
