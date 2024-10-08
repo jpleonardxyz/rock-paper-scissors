@@ -25,7 +25,7 @@ function playRound(humanChoice, computerChoice){
 
     //if choices are the same return a draw
     if (humanChoice === computerChoice.toUpperCase()){
-        pResult.textContent = "\nThis round is a draw\n Score is still " + humanScore + " - " + computerScore;
+        pResult.textContent = "\nThis round is a draw. The score is still " + humanScore + " - " + computerScore;
         results.appendChild(pResult);
         return;
     }
@@ -85,7 +85,8 @@ buttons.forEach((button) => {
     //playround using correct choice
     button.addEventListener("click", () => {
         let computerChoice = getComputerChoice();
-        switch (button.id) {
+        if ((humanScore < 5) && (computerScore < 5)){
+           switch (button.id) {
             case "rock":
                 console.log("Clicked rock button");
                 playRound("rock", computerChoice);
@@ -98,7 +99,9 @@ buttons.forEach((button) => {
             case "scissors":
                 playRound("scissors", computerChoice);
                 break;
+            } 
         }
+        
     });
 });
 
