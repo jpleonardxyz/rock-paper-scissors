@@ -15,19 +15,6 @@ function getComputerChoice(){
     }
 }
 
-function getHumanChoice(){
-    //ask the user to input their choice
-    let userChoice = prompt("Enter your choice of rock, paper or scissors");
-    
-    //check if the choice is valid, return a default choice if not
-    if (userChoice === null || (userChoice !== "rock" && userChoice !== "paper" && userChoice !== "scissors")){
-        return "rock";
-    }
-    //return the choice
-    return userChoice;
-}
-
-
 
 function playRound(humanChoice, computerChoice){
     //convert human choice into all caps to prevent case sensitivity
@@ -76,9 +63,29 @@ let humanScore = 0;
 let computerScore = 0;
 
 //get references to buttons
+const buttons = document.querySelectorAll("button");
 
 
+//add event listeners to the buttons
+buttons.forEach((button) => {
+    
+    //playround using correct choice
+    button.addEventListener("click", () => {
+        let computerChoice = getComputerChoice();
+        switch (button.id) {
+            case "rock":
+                console.log("Clicked rock button");
+                playRound("rock", computerChoice);
+                break;
+            
+            case "paper":
+                playRound("paper", computerChoice);
+                break;
 
-//play the game
-playGame();
+            case "scissors":
+                playRound("scissors", computerChoice);
+                break;
+        }
+    });
+});
 
