@@ -17,12 +17,16 @@ function getComputerChoice(){
 
 
 function playRound(humanChoice, computerChoice){
+    //create paragraph element for outputting results
+    const pResult = document.createElement("p");
+
     //convert human choice into all caps to prevent case sensitivity
     humanChoice = humanChoice.toUpperCase();
 
     //if choices are the same return a draw
     if (humanChoice === computerChoice.toUpperCase()){
-        console.log("This round is a draw");
+        pResult.textContent = "\nThis round is a draw\n Score is still " + humanScore + " - " + computerScore;
+        results.appendChild(pResult);
         return;
     }
 
@@ -30,12 +34,16 @@ function playRound(humanChoice, computerChoice){
     if ((humanChoice === "ROCK" && computerChoice === "scissors") || 
         (humanChoice === "SCISSORS" && computerChoice === "paper") ||
         (humanChoice === "PAPER" && computerChoice === "rock")){
-            console.log(`You win - ${humanChoice} beats ${computerChoice.toUpperCase()}`);
             humanScore++;
+            pResult.textContent = `\nYou win this round: ${humanChoice} beats ${computerChoice.toUpperCase()}. 
+            The score is currently ${humanScore} - ${computerScore}`;
+            results.appendChild(pResult);
         }
     else{
-        console.log(`You lose - ${computerChoice.toUpperCase()} beats ${humanChoice}`);
         computerScore++;
+        pResult.textContent = `\nYou lose this round: ${humanChoice} beats ${computerChoice.toUpperCase()}.  
+        The score is currently ${humanScore} - ${computerScore}`;
+        results.appendChild(pResult);
     }
 
     //check if someone has reached 5 points, if so determine winner
@@ -49,12 +57,15 @@ function playRound(humanChoice, computerChoice){
 
 
 function checkWinner(){
+    const pFinal = document.createElement("p");
     //determine and display the winner
     if (humanScore > computerScore){
-        console.log("You beat the machine - final score was " + humanScore + " to " + computerScore);
+        pFinal.textContent = "You beat the machine - final score was " + humanScore + " to " + computerScore;
+        results.appendChild(pFinal);
     }
     else{
-        console.log("You lost to the machine - final score was " + humanScore + " to " + computerScore);
+        pFinal.textContent = "You lost to the machine - final score was " + humanScore + " to " + computerScore;
+        results.appendChild(pFinal);
     }
 }
     
@@ -65,6 +76,8 @@ let computerScore = 0;
 //get references to buttons
 const buttons = document.querySelectorAll("button");
 
+//get reference to results div
+const results = document.querySelector("#results");
 
 //add event listeners to the buttons
 buttons.forEach((button) => {
